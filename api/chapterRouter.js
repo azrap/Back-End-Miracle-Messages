@@ -17,19 +17,12 @@ const aws_link =
 /****************************************************************************/
 router.get("/", async (req, res) => {
   try {
-    let chapters = await chapterDB.findChapters();
+    const chapters = await chapterDB.findChapters();
 
-    const promises = chapters.map(async chapter => {
-      let partners = await partnerDB.findById(chapter.id);
-      chapter.partners = partners;
-      return chapter;
-    });
-
-    chapters = await Promise.all(promises);
     res.status(200).json(chapters);
-  } catch {
+  } catch (error) {
     res.status(500).json({
-      error: "there was a problem getting chapter or partner information"
+      message: "Error getting the chapters"
     });
   }
 });
@@ -95,7 +88,7 @@ router.post("/", async (req, res) => {
       // 3) we store the chapter image url in the database:
       //a) first get the name of the file
       const chapterImgName = await req.files.chapter_img.name;
-      
+
       //b) then we encode the name i.e replace spaces etc with special characters to make it URL compatible 
       //so it can be appended to the s3 bucket link:
       const encodedChapterImgName = encodeURI(chapterImgName);

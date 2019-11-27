@@ -17,9 +17,9 @@ function findChapterPartners(chapterId) {
 }
 
 //given a partner id, remove all chapter relationships for that partner
-function removePartnerChapter(partnerIid) {
+function removePartnerChapter(partnerId) {
   return db("chapters_partners")
-    .where({ partnersid: partnerIid })
+    .where({ partnersid: partnerId })
     .del();
 }
 
