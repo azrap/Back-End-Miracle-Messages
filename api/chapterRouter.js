@@ -4,6 +4,7 @@ const uploadToS3 = require("../middleware/uploadToS3.js");
 const chapterDB = require("../models/chapters-model.js");
 const chaptersPartnersDB = require("../models/chapters-partners-model.js");
 const partnerDB = require("../models/partners-model");
+const MW = require("../middleware/chaptersMW")
 
 const aws_link =
   "https://labs14-miracle-messages-image-upload.s3.amazonaws.com/";
@@ -31,7 +32,7 @@ router.get("/", async (req, res) => {
 // THIS IS FOR GETTING A SPECIFIC CHAPTER BY ID
 /****************************************************************************/
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", MW.validateChapterId, async (req, res) => {
   try {
     const chapter = await chapterDB.findBy(req.params.id);
 
@@ -46,7 +47,7 @@ router.get("/:id", async (req, res) => {
 //************************************************************
 //THIS IS FOR GETTING ALL PARTNER ORGANIZATIONS FOR A SPECIFIC CHAPTER
 //************************************************************
-router.get("/:id/partners", async (req, res) => {
+router.get("/:id/partners", MW.validateChapterId, async (req, res) => {
   try {
     const chapter = await chaptersPartnersDB.findChapterPartners(req.params.id);
 
@@ -101,7 +102,9 @@ router.post("/", async (req, res) => {
       const { reunion_img } = await req.files;
 
       try {
+
         uploadToS3(reunion_img, res);
+
       } catch (error) {
         res.status(500).json({ error: "error uploading the image to AWS" });
       }
@@ -156,6 +159,7 @@ router.put("/:id", async (req, res) => {
     const updatedChapter = await req.body;
 
     if (req.files && req.files.chapter_img) {
+
       //uploading and storing chapter image to aws:
       const { chapter_img } = await req.files;
       try {
