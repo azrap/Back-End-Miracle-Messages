@@ -17,13 +17,13 @@ async function validateChapterId(req, res, next) {
     const id = req.params.id;
     try {
         const records = await db('chapters').where({ id });
-        if (records.length > 0)
+        if (records)
             next();
         else {
-            res.status(404).json({ errorMessage: "Chapter idd does  not exist" })
+            res.status(404).json({ errorMessage: `We couldn't find chapter id ${id} in the database` })
         }
     }
     catch {
-        res.status(500).json({ errorMessage: "There was a problem looking up chapter id" })
+        res.status(500).json({ errorMessage: `There was a problem looking up chapter id ${id}` })
     }
 }

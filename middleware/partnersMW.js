@@ -46,7 +46,7 @@ async function verifyPartnerData(req, res, next) {
                         next()
                     }
                     else {
-                        res.status(409).json({errorMessage: "An icon image with this filename already exists"});
+                        res.status(409).json({errorMessage: "An icon image with this filename already exists, please rename the file and try again"});
                     }
                 }
             catch {
