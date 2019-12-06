@@ -60,7 +60,7 @@ router.delete("/:id", MW.validatePartnerId, async (req, res) => {
     const numPartners = await partnersDb.remove(partnerId);
     res.status(200).json({
       partners: `${numPartners} partner deleted`,
-      chapters: `this partner removed from ${numChapters} chapters`
+      chapters: `this partner has been removed from ${numChapters} chapters`
     });
   } catch {
     res

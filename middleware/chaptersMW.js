@@ -2,13 +2,12 @@ const db = require('../config/dbConfig.js')
 
 module.exports = {
     validateChapterId,
-    // verifyChapterData,
-    // verifyChapterImgFilename
+    checkDupesChapterImg,
+    checkDupesReunionImg
+
 }
 
 const aws_link = "https://labs14-miracle-messages-image-upload.s3.amazonaws.com/";
-
-
 
 /****************************************************************************/
 /*                        Verify that chapter Id exists - DONE              */
@@ -33,30 +32,72 @@ async function validateChapterId(req, res, next) {
 /*                  Verify chapter image filename is not duplicate                  */
 /****************************************************************************/
 
-async function verifyChapterImgFilename(req, res, next) {
+async function checkDupesChapterImg(req, res, next) {
 
-    const id = req.params.id;
+    if (!req.files) {
+        next()
+    }
+    else if (!req.files.chapter_img) {
+        next()
+    }
 
-    if (req.files && req.files.partner_icon) {
+    else {
         try {
-            const iconURL = aws_link + encodeURI(req.files.partner_icon.name);
-            const found = await db('partners')
-                .select('icon_url')
-                .where({ id })
-                .first();
+            const chapter_img_URL = aws_link + encodeURI(req.files.chapter_img.name);
+            const found = await db('chapters')
+                .where({ chapter_img_url: chapter_img_URL })
+                .orWhere({ reunion_img_url: chapter_img_URL });
 
-            if (found.icon_url !== iconURL) {
+            if (found.length == 0) {
                 next()
             }
             else {
-                res.status(409).json({ errorMessage: "An icon image with this filename already exists" });
+                res.status(409).json({ errorMessage: "An image with this name already exists, please try again" });
             }
         }
         catch {
-            res.status(500).json({ errorMessage: " There is a problem checking if icon url exists in database" });
+            res.status(500).json({ errorMessage: " There is a problem checking if chapter image url exists in database" });
         }
     }
 }
+
+/****************************************************************************/
+/*                  Verify reunion image filename is not duplicate                  */
+/****************************************************************************/
+
+async function checkDupesReunionImg
+    (req, res, next) {
+
+    if (!req.files) {
+        next()
+    }
+    else if (!req.files.reunion_img) {
+        next()
+    }
+
+    else {
+        try {
+            const reunion_img_URL = aws_link + encodeURI(req.files.reunion_img.name);
+            const found = await db('chapters')
+                .where({ chapter_img_url: reunion_img_URL })
+                .orWhere({ reunion_img_url: reunion_img_URL });
+
+
+            if (found.length == 0) {
+                next()
+            }
+            else {
+                res.status(409).json({ errorMessage: "An image with this filename already exists" });
+            }
+        }
+        catch {
+            res.status(500).json({ errorMessage: " There is a problem checking if reunion image url exists in database" });
+        }
+    }
+}
+
+
+
 
 // chatpers validation:
 // check to see what fields there are in the chapter form/DB object
