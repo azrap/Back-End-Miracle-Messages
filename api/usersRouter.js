@@ -13,7 +13,6 @@ const router = express.Router();
 
 router.post('/register', restricted, async (req, res) => {
 
-
   try {
     let user = req.body;
     const hash = bcrypt.hashSync(user.password, 10);

@@ -3,7 +3,6 @@ const router = express.Router();
 const uploadToS3 = require("../middleware/uploadToS3.js");
 const chapterDB = require("../models/chapters-model.js");
 const chaptersPartnersDB = require("../models/chapters-partners-model.js");
-const partnerDB = require("../models/partners-model");
 const MW = require("../middleware/chaptersMW")
 
 const aws_link =
@@ -16,14 +15,29 @@ const aws_link =
 /****************************************************************************/
 /*               GET all chapters with all related partners                */
 /****************************************************************************/
+
 router.get("/", async (req, res) => {
   try {
-    const chapters = await chapterDB.findChapters();
+    let chapters = await chapterDB.findChapters();
 
+    const promises = chapters.map(async chapter => {
+      let partners = await chaptersPartnersDB.findChapterPartners(chapter.id);
+
+      if (partners) {
+        chapter.partners = partners;
+      }
+      else {
+
+        chapters.partners = []
+      }
+      return chapter;
+    });
+
+    chapters = await Promise.all(promises);
     res.status(200).json(chapters);
-  } catch (error) {
+  } catch {
     res.status(500).json({
-      message: "Error getting the chapters"
+      error: "there was a problem getting chapter or partner information"
     });
   }
 });
