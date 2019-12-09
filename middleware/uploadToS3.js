@@ -19,7 +19,7 @@ const uploadToS3 = (file, res) => {
   });
 
   //this creates the bucket/space within the s3bucket for the upload
-  s3Bucket.createBucket(() => {
+  s3Bucket.createBucket(async () => {
     const params = {
       Bucket: S3_BUCKET_NAME,
       Key: file.name,
@@ -28,7 +28,6 @@ const uploadToS3 = (file, res) => {
     };
 
     // call S3 to upload file to bucket
-
     s3Bucket.upload(params, (err, data) => {
       if (err) {
         console.log("error in callback");
@@ -37,10 +36,16 @@ const uploadToS3 = (file, res) => {
       }
       console.log("success");
 
-      return data;
+      res.status(200).json(data);
 
-      // res.status(200).json(data);
-    });
+
+    })
+
+
+
+
+
+
   });
 };
 

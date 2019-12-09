@@ -7,7 +7,7 @@ const AWS = require("aws-sdk");
 //the below endpoint is merely to test that AWS upload works correctly
 //see this doc for instructions on how to use: https://www.notion.so/Uploading-to-s3-Bucket-Node-js-39579c64549942e883b143c9624abc67
 router.post("/", async (req, res) => {
-  const file = req.files.name;
+  const filename = req.files.name;
 
   console.log(filename);
 

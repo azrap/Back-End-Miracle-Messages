@@ -60,7 +60,7 @@ router.delete("/:id", MW.validatePartnerId, async (req, res) => {
     const numPartners = await partnersDb.remove(partnerId);
     res.status(200).json({
       partners: `${numPartners} partner deleted`,
-      chapters: `this partner removed from ${numChapters} chapters`
+      chapters: `this partner has been removed from ${numChapters} chapters`
     });
   } catch {
     res
@@ -74,14 +74,14 @@ router.delete("/:id", MW.validatePartnerId, async (req, res) => {
 /****************************************************************************/
 
 router.post("/", MW.verifyPartnerData, async (req, res) => {
-  
+
   const newPartner = req.body;
   const { partner_icon } = req.files;
 
   //first we upload the icon to AWS and make sure it succeeds:
   try {
     uploadToS3(partner_icon, res);
-  } 
+  }
   catch (error) {
     res
       .status(500)
@@ -103,9 +103,9 @@ router.post("/", MW.verifyPartnerData, async (req, res) => {
     res.status(201).json(partnerId);
   }
   catch {
-    res.status(500).json({errorMessage: "There was a problem adding partner to database"})
+    res.status(500).json({ errorMessage: "There was a problem adding partner to database" })
   }
-  
+
 
 });
 
