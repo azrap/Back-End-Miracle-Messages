@@ -92,7 +92,7 @@ To get the server running locally:
 #### Chapters-Partners
 
 This table stores the relationship when a partner organization gets assigned to a specific chapter
-
+```
 {
     id: INT,
     chaptersid: FOREIGN KEY (chapters.id),
@@ -100,7 +100,7 @@ This table stores the relationship when a partner organization gets assigned to 
 
 
 }
-
+```
 
 
 
@@ -144,7 +144,7 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Frontend Documentation](https://github.com/sauti-databank/front-end/blob/master/README.md) for details on the frontend of our project.
+See [Frontend Documentation](https://github.com/miracle-messages-after-labs14/Front-End-Miracle-Messages) for details on the frontend of our project.
 
 
 
