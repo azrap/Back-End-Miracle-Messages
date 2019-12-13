@@ -1,3 +1,15 @@
+
+Miracle Messages is a nonprofit reunion service to help our neighbors experiencing homelessness reunite with their loved ones in a positive and supportive way.
+
+Mission: "I didn't realize I was homeless until I lost my friends and family"
+
+We believe everyone is somebody's someone, and no one should be defined by what they lack. Miracle Messages Map connects volunteers, making it easy to join together to reunite more homeless people with their families.
+
+This repo has been forked from the Lambda-School Miracle Messages labs project back-end repo. 
+
+[Project Frontend Repo](https://github.com/miracle-messages-after-labs14/Front-End-Miracle-Messages)
+[Project live-site](https://miracle-messages-after-labs14.netlify.com/)
+
 # API Documentation
 
 #### Backend deployed on [Heroku](https://miracle-messages-staging2.herokuapp.com/). <br>
