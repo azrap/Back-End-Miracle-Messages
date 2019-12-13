@@ -1,6 +1,6 @@
 # API Documentation
 
-#### Backend deployed on [Heroku](https://staging-sauti-labs-14.herokuapp.com/). <br>
+#### Backend deployed on [Heroku](https://miracle-messages-staging2.herokuapp.com/). <br>
 
 ## Getting started
 To get the server running locally:
@@ -54,187 +54,58 @@ To get the server running locally:
 
 # Data Model
 
-#### Platform sessions
+#### Chapters  
 
 ```
 {
-  sess_id: UUID
-  cell_num: varchar(25)
-  created_date: datetime
-  udate: timestamp
-  data: STRING
-  platform_id:  int(2)
-  notes: varchar(400)
+        id: INT ,
+        city: STRING ,
+        state: STRING (64 CHAR),
+        numvolunteers: INT,
+        longitude: INT,
+        latitude: INT,
+        title: STRING (128 CHAR),
+        numreunions: INT,
+        msg_recorded: INT,
+        msg_delivered: INT,
+        chapter_img_url: STRING (512 CHAR),
+        reunion_img_url: STRING (512 CHAR),
+        established_date: STRING,
+        description: STRING (2048 CHAR),
+        story: STRING (2048 CHAR),
+        email: STRING (128 CHAR)
 }
 ```
 
-#### Users
+#### Partners 
 
 ```
 {
-  id: UUID
-  cell_num: UUID foreign key in PLATFORM_SESSIONS table
-  gender: STRING
-  age: STRING
-  education: STRING
-  crossing_freq: STRING
-  produce: STRING
-  primary_income: STRING
-  language: STRING
-  country_of_residence: STRING
-}
+        id: integer
+        category: string, [either "chapter" or "sponsor"]
+        "name": string,
+        "site_url": string, 
+        "icon_url": string
+    }
 ```
 
-#### Information demand
-```
+#### Chapters-Partners
+
+This table stores the relationship when a partner organization gets assigned to a specific chapter
+
 {
-  "id": INTEGER,
-  "platform_sessions_id": INTEGER,
-  "cell_num": INTEGER,
-  "request_type_id": INTEGER,
-  "request_value": STRING
+    id: INT,
+    chaptersid: FOREIGN KEY (chapters.id),
+    partnersid: FOREIGN KEY (partners.id)
+
+
 }
-```
-### Data parsers:
-- the file dataCleaner.js in the routes folder has the script that cleaned the data from platform_sessions table and poppulated the trader demographic info in the Users table (labs14)
 
-- the file sessionsDataParser.js in the root back-end directory has the script that cleaned the data from platform_sessions table and poppulated the trader demographic info in the Users table (labs16)
 
 
 
-## Actions
 
-_Note: every time we say users below, we're referring to the traders who log on and use the Sauti Databan platform, not the users (often researchers) who view Sauti's data_.
 
-### Education data actions
-
-`getEducation()` -> Returns all users who reported any education completed.
-
-`getEducationPrimary()` -> Returns all users who reported primary as their highest level of education.
-
-`getEducationSecondary()` -> Returns all users who reported secondary as their highest level of education.
-
-`getEducationUni()` -> Returns all users who reported University as their highest level of education.
-
-`getEducationNone()` -> Returns all users who reported that they did not receive any formal education.
-
-### Gender data actions
-
-`getGenderAll()` -> Returns all users who reported any gender selection.
-
-`getGenderMale()` -> Returns all users who reported a male gender identity.
-
-`getGenderFemale()` -> Returns all users who reported a female gender identity.
-
-### Border crossing frequency data actions
-
-`getCrossingFreqAll()`-> Returns all users who reported any border crossing frequency.
-
-`getCrossingFreqDaily()`-> Returns all users who reported crossing a border daily.
-
-`getCrossingFreqWeekly()` -> Returns all users who reported crossing a border weekly.
-
-`getCrossingFreqMonthly()` -> Returns all users who reported crossing a border monthly.
-
-`getCrossingFreqNever()` -> Returns all users who reported never crossing a border.
-
-### Language data actions
-
-`getLanguageAll()` -> Returns all users who reported any language data.
-
-`getLanguageEnglish()` -> Returns all users who reported English as their primary language.
-
-`getLanguageSwahili()` -> Returns all users who reported Swahili as their primary language.
-
-`getLanguageKinya()` -> Returns all users who reported Kinyarwanda as their primary language.
-
-`getLanguageLug()` -> Returns all users who reported Luganda as their primary language.
-
-`getLanguageLuk()` -> Returns all users who reported Lukiga as their primary language.
-
-### Country of residence data actions
-
-`getCountryAll()` -> Returns all users who reported a country of residence.
-
-`getCountryKenya()` -> Returns all users who reported Kenya as their country of residence.
-
-`getCountryUganda()` -> Returns all users who reported Uganda as their country of residence.
-
-`getCountryRwanda()` -> Returns all users who reported Rwanda as their country of residence.
-
-### Age data actions
-
-`getAgeAll()` -> Returns all users who reported an age demographic.
-
-`getAgeGroupZero()` -> Returns all users who reported their age demographic as 10-20 years.
-
-`getAgeGroupOne()` -> Returns all users who reported their age demographic as 20-30 years.
-
-`getAgeGroupTwo()` -> Returns all users who reported their age demographic as 30-40 years.
-
-`getAgeGroupThree()` -> Returns all users who reported their age demographic as 40-50 years.
-
-`getAgeGroupFour()` -> Returns all users who reported their age demographic as 50-60 years.
-
-`getAgeGroupFive()` -> Returns all users who reported their age demographic as 60-70 years.
-
-### Primary income data actions
-
-`getPrimaryIncomeAll()` -> Returns all users who answered a question about trade and primary income.
-
-`getPrimaryIncomeYes()` -> Returns all users who reported border trade as their primary source of income.
-
-`getPrimaryIncomeNo()` -> Returns all users who reported that border trade is _not_ their primary source of income.
-
-### Produce data actions
-
-`getProduceAll()` -> Returns a list of all users who answered whether or not they trade produce at the border.
-
-`getProduceYes()` -> Returns a list of all users who say that yes they do trade produce at the border.
-
-`getProduceNo()` -> Returns a list of all users who say they do _not_ trade produce at the border.
-
-### Commodity category actions
-`getComCat()` -> Returns a list of all the commodity categories.
-
-### Document information procedures action
-`getInfoPro()` -> Returnas a list of all the documentation for procedures.
-
-### Most requested agency actions
-`getReqAge()` -> Returns a list of the most requested agencies.
-
-### Procedure commodities actions
-`getProCom()` -> Returns a list of procedure commodities.
-
-### Prodecude destination actions
-`getDestInfo()` -> Returns a list of destinations frequented.
-
-
-### Final destination country actions
-`getDestCountry()` -> Returns a list of the final destination countries.
-
-### Final destination market actions
-`getDestMarket()` -> Returns a list of the final destination markets.
-
-### Exchange rate destination  actions
-`getExRate()` -> Returns a list of the exchange rate countries.
-
-### Top commodity categories
-`getTopCat()` -> Returns a list of the top commodity categories.
-
-###Top commodities
-`getTopCom()` -> Returns a list of the top commodites.
-
-### Origin of traders goods actions
-`getTradersGoods()` -> Returns a list of the origin(country) of traded goods.
-
-## Environment Variables
-
-In order for the app to function correctly, the user must set up their own environment variables.
-
-create a .env file that includes the following:
-- username: Reach out to Sauti for access. 
-- password: Reach out to Sauti for access.
 
 ## Contributing
 
