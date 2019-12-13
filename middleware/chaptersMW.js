@@ -99,14 +99,7 @@ async function checkDupesReunionImg
 
 
 
-// chatpers validation:
-// check to see what fields there are in the chapter form/DB object
-// make chapter image required, reunion image optional.
-//figure out other objects that you want to make required
-// fire up the FE to check out the form again
-// make reunion image optional but check for duplicates in the db
 
-//chapters-partners-model:
 
 
 

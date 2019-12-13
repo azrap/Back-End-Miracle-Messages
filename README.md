@@ -2,22 +2,6 @@
 
 #### Backend deployed on [Heroku](https://miracle-messages-staging2.herokuapp.com/). <br>
 
-## Getting started
-To get the server running locally:
-
-- Clone this repo, then, cd into the repo in Terminal and:
-- **yarn install** to install all required dependencies.
-- **yarn server** to start the local server.
-- **yarn test** to start server using testing environment.
-- **update .env** store environment variables
-
-### Backend framework
-
-- [REST API](https://restfulapi.net/)
-- [Node](https://nodejs.org/en/)
-- [Express](https://expressjs.com/)
-- [Knex](http://knexjs.org/): 
-- [PostgreSQL](https://www.postgresql.org/)
 
 
 ## Endpoints
