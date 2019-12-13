@@ -39,140 +39,17 @@ To get the server running locally:
 | PUT    | `/api/chapter/:id`          | admin         | update the info for a specific chapter with the provided id|
 | DELETE    | `/api/chapter/:id`          | admin         | delete a specific chapter with the provided id|
 | POST    | `/api/chapter/:id/partners/:partnerid`          | admin         | remove a partner or sponsor organization with the provided partner id from the chapter with the provided chapter id |
-#### Accessing border crossing frequency data
-#### Accessing border crossing frequency data
 
-| Method | Endpoint                                | Access Control | Description                                                                 |
-| ------ | --------------------------------------- | -------------- | --------------------------------------------------------------------------- |
-| GET    | `/users/all/crossingfreq/all`           | public         | Returns all Sauti Databank users that recorded a border crossing frequency. |
-| GET    | `/users/all/crossingfreq/daily/count`   | public         | Returns the number of users who report crossing a border daily.             |
-| GET    | `/users/all/crossingfreq/weekly/count`  | public         | Returns the number of users who report crossing a border weekly.            |
-| GET    | `/users/all/crossingfreq/monthly/count` | public         | Returns the number of users who report crossing a border monthly.           |
-| GET    | `/users/all/crossingfreq/never/count`   | public         | Returns the number of users who report never crossing a border.             |
+#### Partner Routes
+| Method | Endpoint                         | Access Control | Description                                                                                |
+| ------ | -------------------------------- | -------------- | ------------------------------------------------------------------------------------------ |
+| GET    | `/api/partner`          | admin         | Returns all Miracle Messages partner and sponsor organizations |
 
-#### Accessing education data
+| DELETE    | `/api/partner/:id`          | admin         | delete a partner with provided id. This also removes the partner from any chapters it was connected to |
+| POST    | `/api/partner`          | admin         | Add a new partner or sponsor organization to the database |
+| PUT    | `/api/partner/:id`          | admin         | update a partner or sponsor with provided id |
 
-| Method | Endpoint                               | Access Control | Description                                                                               |
-| ------ | -------------------------------------- | -------------- | ----------------------------------------------------------------------------------------- |
-| GET    | `/users/all/all/education/all`         | public         | Returns all users who reported any education history.                                     |
-| GET    | `/users/all/education/primary/count`   | public         | Returns a count of all users who reported primary as their highest level of education.    |
-| GET    | `/users/all/education/secondary/count` | public         | Returns a count of all users who reported secondary as their highest level of education.  |
-| GET    | `/users/all/education/uni/count`       | public         | Returns a count of all users who reported university as their highest level of education. |
-| GET    | `/users/all/education/none/count`      | public         | Returns a count of all users who reported they had no education.                          |
 
-#### Accessing language data
-
-| Method | Endpoint                            | Access Control | Description                                                                            |
-| ------ | ----------------------------------- | -------------- | -------------------------------------------------------------------------------------- |
-| GET    | `/users/all/language/all`           | public         | Returns all Sauti Databank users that reported a language.                             |
-| GET    | `/users/all/language/english/count` | public         | Returns the number of Sauti Databank users who reported English as their language.     |
-| GET    | `/users/all/language/swahili/count` | public         | Returns the number of Sauti Databank users who reported Swahili as their language.     |
-| GET    | `/users/all/language/kinya/count`   | public         | Returns the number of Sauti Databank users who reported Kinyarwanda as their language. |
-| GET    | `users/all/language/luganda/count`  | public         | Returns the number of Sauti Databank users who reported Luganda as their language.     |
-| GET    | `users//all/language/lukiga/count`  | public         | Returns the number of Sauti Databank users who reported Lukiga as their language. .    |
-
-#### Accessing country of residence data
-
-| Method | Endpoint                          | Access Control | Description                                                                                   |
-| ------ | --------------------------------- | -------------- | --------------------------------------------------------------------------------------------- |
-| GET    | `/users/all/country/all`          | public         | Returns all Sauti Databank users that reported a country of residence.                        |
-| GET    | `users/all/country/kenya/count`   | public         | Returns the number of Sauti Databank users who reported Kenya as their country of residence.  |
-| GET    | `/users/all/country/uganda/count` | public         | Returns the number of Sauti Databank users who reported Uganda as their country of residence. |
-| GET    | `/users/all/country/rwanda/count` | public         | Returns the number of Sauti Databank users who reported Rwanda as their country of residence. |
-
-#### Accessing age data
-
-| Method | Endpoint                           | Access Control | Description                                                                         |
-| ------ | ---------------------------------- | -------------- | ----------------------------------------------------------------------------------- |
-| GET    | `/users/all/age/all`               | public         | Returns all Sauti Databank users that reported an age demographic.                  |
-| GET    | `users/all/age/group-zero/count`   | public         | Returns the number of Sauti Databank users who reported an age between 10-20 years. |
-| GET    | `/users/all/age/group-one/count`   | public         | Returns the number of Sauti Databank users who reported an age between 20-30 years. |
-| GET    | `/users/all/age/group-two/count`   | public         | Returns the number of Sauti Databank users who reported an age between 30-40 years. |
-| GET    | `/users/all/age/group-three/count` | public         | Returns the number of Sauti Databank users who reported an age between 40-50 years. |
-| GET    | `/users/all/age/group-four/count`  | public         | Returns the number of Sauti Databank users who reported an age between 50-60 years. |
-| GET    | `/users/all/age/group-five/count`  | public         | Returns the number of Sauti Databank users who reported an age between 60-70 years. |
-
-#### Accessing primary income data
-
-| Method | Endpoint                             | Access Control | Description                                                                                                        |
-| ------ | ------------------------------------ | -------------- | ------------------------------------------------------------------------------------------------------------------ |
-| GET    | `/users/all/primary-income/all`      | public         | Returns all Sauti Databank users that reported an answer to the primary income question.                           |
-| GET    | `users/all/primary-income/yes/count` | public         | Returns the number of Sauti Databank users who reported small border trade as a primary source of income.          |
-| GET    | `/users/all/primary-income/no/count` | public         | Returns the number of Sauti Databank users who reported small border trade was not their primary source of income. |
-
-#### Accessing produce data
-
-| Method | Endpoint                      | Access Control | Description                                                                                           |
-| ------ | ----------------------------- | -------------- | ----------------------------------------------------------------------------------------------------- |
-| GET    | `/users/all/produce/all`      | public         | Returns all Sauti Databank users that reported an answer to the produce question.                     |
-| GET    | `users/all/produce/yes/count` | public         | Returns the number of Sauti Databank users who reported trading produce at the border.                |
-| GET    | `/users/all/produce/no/count` | public         | Returns the number of Sauti Databank users who reported that they do not trade produce at the border. |
-
-#### Accessing Procedures for Commodity Categories data
-
-| Method | Endpoint                      | Access Control | Description                                                                                           |
-| ------ | ----------------------------- | -------------- | ----------------------------------------------------------------------------------------------------- |
-| GET    | `/commodity-cat`      | public         | Returns the most requested procedures for commodity categories.   
-
-#### Accessing Most Requested Document Information for Procedures data
-
-| Method | Endpoint                      | Access Control | Description                                                                                           |
-| ------ | ----------------------------- | -------------- | ----------------------------------------------------------------------------------------------------- |
-| GET    | `/info-pro`      | public         | Returns the most requested document information for procedures.  
-
-#### Accessing Most Requested Agency Information for Procedures data
-
-| Method | Endpoint                      | Access Control | Description                                                                                           |
-| ------ | ----------------------------- | -------------- | ----------------------------------------------------------------------------------------------------- |
-| GET    | `/agency-info`      | public         | Returns the most requested agency information for procedures.  
-
-#### Accessing Most Requested Procedures for Commodities data
-
-| Method | Endpoint                      | Access Control | Description                                                                                           |
-| ------ | ----------------------------- | -------------- | ----------------------------------------------------------------------------------------------------- |
-| GET    | `/procedure-com`      | public         | Returns the most requested procedures for commodities.
-
-#### Accessing Requested Procedures for Destination (Imports to:) data
-
-| Method | Endpoint                      | Access Control | Description                                                                                           |
-| ------ | ----------------------------- | -------------- | ----------------------------------------------------------------------------------------------------- |
-| GET    | `/dest-info`      | public         | Returns the requested procedures for destination.
-
-#### Accessing Final Destination Country data
-
-| Method | Endpoint                      | Access Control | Description                                                                                           |
-| ------ | ----------------------------- | -------------- | ----------------------------------------------------------------------------------------------------- |
-| GET    | `/dest-country`      | public         | Returns the final destination country.
-
-#### Accessing Final Destination Markert data
-
-| Method | Endpoint                      | Access Control | Description                                                                                           |
-| ------ | ----------------------------- | -------------- | ----------------------------------------------------------------------------------------------------- |
-| GET    | `/dest-market`      | public         | Returns the final destination market.
-
-#### Accessing Exchange Direction data
-
-| Method | Endpoint                      | Access Control | Description                                                                                           |
-| ------ | ----------------------------- | -------------- | ----------------------------------------------------------------------------------------------------- |
-| GET    | `/exchange-rate`      | public         | Returns the exchange direction.
-
-#### Accessing Top Commodity Categories data
-
-| Method | Endpoint                      | Access Control | Description                                                                                           |
-| ------ | ----------------------------- | -------------- | ----------------------------------------------------------------------------------------------------- |
-| GET    | `/top-cat`      | public         | Returns the top commodity categories.
-
-#### Accessing Top Commodities data
-
-| Method | Endpoint                      | Access Control | Description                                                                                           |
-| ------ | ----------------------------- | -------------- | ----------------------------------------------------------------------------------------------------- |
-| GET    | `/top-com`      | public         | Returns the top commodities.
-
-#### Accessing Origin of Traders' Goods data
-
-| Method | Endpoint                      | Access Control | Description                                                                                           |
-| ------ | ----------------------------- | -------------- | ----------------------------------------------------------------------------------------------------- |
-| GET    | `/traders-goods`      | public         | Returns origin of traders' goods.
 
 
 # Data Model
