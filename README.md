@@ -40,8 +40,7 @@ This repo has been forked from the Lambda-School Miracle Messages labs project b
 | Method | Endpoint                         | Access Control | Description                                                                                |
 | ------ | -------------------------------- | -------------- | ------------------------------------------------------------------------------------------ |
 | GET    | `/api/partner`          | admin         | Returns all Miracle Messages partner and sponsor organizations |
-
-| DELETE    | `/api/partner/:id`          | admin         | delete a partner with provided id. This also removes the partner from any chapters it was connected to |
+| DELETE    | `/api/partner/:id`          | admin         | delete a partner with provided id |
 | POST    | `/api/partner`          | admin         | Add a new partner or sponsor organization to the database |
 | PUT    | `/api/partner/:id`          | admin         | update a partner or sponsor with provided id |
 
