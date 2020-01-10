@@ -1,9 +1,9 @@
 
 Miracle Messages is a nonprofit reunion service to help our neighbors experiencing homelessness reunite with their loved ones in a positive and supportive way.
 
-Mission: "I didn't realize I was homeless until I lost my friends and family"
+"I didn't realize I was homeless until I lost my friends and family"
 
-We believe everyone is somebody's someone, and no one should be defined by what they lack. Miracle Messages Map connects volunteers, making it easy to join together to reunite more homeless people with their families.
+Mission: We believe everyone is somebody's someone, and no one should be defined by what they lack. Miracle Messages Map connects volunteers, making it easy to join together to reunite more homeless people with their families.
 
 This repo has been forked from the Lambda-School Miracle Messages labs project back-end repo. 
 
