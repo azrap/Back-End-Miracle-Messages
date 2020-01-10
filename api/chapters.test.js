@@ -5,10 +5,6 @@ const db = require("../config/dbConfig.js");
 const Chapters = require("../models/chapters-model.js");
 
 describe("chapter model", () => {
-  // beforeEach(async () => {
-  //   await db("chapters").del();
-  // });
-
   describe("GET /", () => {
     it("should return 200", async () => {
       const res = await request(server).get("/api/chapter");
